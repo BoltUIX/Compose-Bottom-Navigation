@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Badge
+import androidx.compose.material.BadgedBox
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -97,15 +99,38 @@ fun RowScope.AddItem(
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 8.dp),
+                .padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Icon(
-                painter = painterResource(id = if (selected) screen.icon_focused else screen.icon),
-                contentDescription = "icon",
-                tint = contentColor
-            )
+
+
+           //* if menu title : Report means we will show badge
+            if(screen.title=="Report"){ // with badge
+                BadgedBox(badge = { Badge { Text("6") } }) {
+                    Icon(
+                        painter = painterResource(id = if (selected) screen.icon_focused else screen.icon),
+                        contentDescription = "icon",
+                        tint = contentColor
+                    )
+                }
+
+            }
+            else{
+
+                Icon(
+                    painter = painterResource(id = if (selected) screen.icon_focused else screen.icon),
+                    contentDescription = "icon",
+                    tint = contentColor
+                )
+
+            }
+
+
+
+
+
+
             AnimatedVisibility(visible = selected) {
                 Text(
                     text = screen.title,
